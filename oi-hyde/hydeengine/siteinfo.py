@@ -56,6 +56,35 @@ class SiteResource(object):
     def __repr__(self):
         return str(self.file)
  
+
+CONTEXT_VARS_MATCHER = re.compile(r'''{%\s*set\s+hyde_(?P<var_name>[^\s]+)\s*=\s*(?P<var_value>.+)%}''')
+def get_context_vars(file_path):
+    fin = open(file_path,'r')
+    ret = {}
+    for line in fin:
+        match = CONTEXT_VARS_MATCHER.match(line)
+        if match:
+            d = match.groupdict()
+            name = d.get('var_name')
+            if not name:
+                continue
+            val = d['var_value'].strip()
+            # unquote
+            was_quoted = False
+            f, l = val[0], val[-1]
+            while f == l and f in ['"', "'"]:
+                was_quoted = True
+                val = val[1:-1]
+                f, l = val[0], val[-1]
+            # try to convert to the appropriate type (this is lame)
+            if not was_quoted:
+                if val == 'True': val = True
+                if val == 'False': val = False
+                if val.isdigit(): val = int(val)
+            ret[name] = val
+    return ret
+
+
 class Page(SiteResource):
     def __init__(self, a_file, node):            
         if not node:            
@@ -79,27 +108,6 @@ class Page(SiteResource):
     def page_name(self):
         return self.file.name_without_extension
 
-    def get_context_text(self):
-        start = re.compile(r'.*?{%\s*hyde\s+(.*?)(%}|$)')
-        end = re.compile(r'(.*?)(%})')
-        fin = open(self.file.path,'r')
-        started = False
-        text = ''
-        matcher = start
-        for line in fin:
-            match = matcher.match(line)
-            if match:
-                text = text + match.group(1)
-                if started: 
-                    break
-                else:
-                    matcher = end 
-                    started = True
-            elif started:
-                text = text + line
-        fin.close()
-        return text
-
     def add_variables(self, page_vars):
         if not page_vars: return
         for key, value in page_vars.iteritems():
@@ -108,12 +116,8 @@ class Page(SiteResource):
             setattr(self, key, value)
 
     def process(self):
-        text = self.get_context_text()
-        import yaml
-        context = yaml.load(text)
-        if not context:
-            context = {}
-        self.add_variables(context)
+        vars = get_context_vars(self.file.path)
+        self.add_variables(vars)
         if (self.file.name_without_extension.lower() ==
                 self.node.folder.name.lower()   or
             self.file.name_without_extension.lower() in                 

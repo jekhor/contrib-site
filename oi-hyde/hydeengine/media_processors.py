@@ -1,15 +1,16 @@
 import os, commands, sys
 import fnmatch
-from django.template.loader import render_to_string
-from django.conf import settings
 from file_system import File     
 from subprocess import check_call, CalledProcessError
+from jinja2 import Environment, FileSystemLoader
+
+from lazysettings import settings
 
 class TemplateProcessor:
     @staticmethod
     def process(resource):
         try:
-            rendered = render_to_string(resource.source_file.path, settings.CONTEXT)
+            rendered = settings.jinja_env.get_template(resource.source_file.path).render(**settings.CONTEXT)
             resource.source_file.write(rendered)
         except:
             print >> sys.stderr, \

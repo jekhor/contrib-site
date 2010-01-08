@@ -74,6 +74,7 @@ def main(argv):
         generator = Generator(options.site_path)
         generator.generate(options.deploy_to, options.keep_watching, quit)        
 
+
     if options.webserve:
         server = Server(options.site_path, address=options.address, port=options.port)
         server.serve(options.deploy_to, quit)

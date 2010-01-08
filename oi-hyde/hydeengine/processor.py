@@ -49,7 +49,6 @@ class Processor(object):
         else:
             return []
         return self.extract_processors(node, processors, self.processor_cache)
-
         
     def extract_processors(self, node, processors, cache):
         current_processors = []
@@ -78,6 +77,25 @@ class Processor(object):
             item.temp_file.delete()
         
     def process(self, resource):
+        if (resource.node.type not in ("content", "media") or
+            resource.is_layout):
+            self.logger.debug("Skipping resource: %s" % str(resource.file))
+            return False
+        self.logger.info("Processing %s" % resource.url)
+        resource.temp_file.parent.make()
+        resource.source_file.copy_to(resource.temp_file)
+        (original_source, resource.source_file) = (resource.source_file, resource.temp_file)
+        if resource.node.type == "content" and not resource.prerendered:
+            self.settings.CONTEXT['page'] = resource
+            self.logger.debug("       Rendering Page")
+            TemplateProcessor.process(resource)
+            self.settings.CONTEXT['page'] = None
+            
+        resource.source_file = original_source
+        self.logger.debug("        Processing Complete")
+        return True
+
+    def process_old(self, resource):
         if (resource.node.type not in ("content", "media") or
             resource.is_layout):
             self.logger.debug("Skipping resource: %s" % str(resource.file))

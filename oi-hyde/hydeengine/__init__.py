@@ -15,16 +15,35 @@ from datetime import datetime
 from Queue import Queue, Empty
 from threading import Thread, Event
 
-from django.conf import settings
-from django.core.management import setup_environ
-from django.template import add_to_builtins
-from django.template.loader import render_to_string
-
+from jinja2 import Environment, FileSystemLoader
 
 from file_system import File, Folder
 from path_util import PathUtil
 from processor import Processor
 from siteinfo import SiteInfo
+from lazysettings import settings
+
+from jinja2 import BaseLoader, TemplateNotFound
+from os.path import join, exists, getmtime
+
+class AbsOrRelPathLoader(BaseLoader):
+
+    def __init__(self, parent_path):
+        super(AbsOrRelPathLoader, self).__init__()
+        self.parent_path = parent_path
+
+    def get_source(self, environment, path):
+        if not path.startswith('/'):
+            # make it absolute
+            path = join(self.parent_path, path)
+        if not exists(path):
+            raise TemplateNotFound(path)
+        mtime = getmtime(path)
+        f = open(path)
+        source = f.read().decode('utf-8')
+        f.close()
+        return source, path, lambda: mtime == getmtime(path)
+
 
 class _HydeDefaults:
     
@@ -48,8 +67,7 @@ def setup_env(site_path):
     if hasattr(settings, "CONTEXT"):
         return
     try:
-        hyde_site_settings = imp.load_source("hyde_site_settings",
-                        os.path.join(site_path,"settings.py"))
+        hyde_site_settings = imp.load_source("hyde_site_settings", os.path.join(site_path,"settings.py"))
     except SyntaxError, err:
         print "The given site_path [%s] contains a settings file " \
               "that could not be loaded due syntax errors." % site_path
@@ -65,10 +83,11 @@ def setup_env(site_path):
         )
     
     try:
-        from django.conf import global_settings
-        defaults = global_settings.__dict__
+    	defaults = {}
         defaults.update(hyde_site_settings.__dict__)
         settings.configure(_HydeDefaults, **defaults)
+        # setup jinja
+        settings.jinja_env = Environment(loader=AbsOrRelPathLoader(settings.LAYOUT_DIR))
     except Exception, err:
         print "Site settings are not defined properly"
         print err
@@ -88,8 +107,6 @@ def validate_settings():
         "GENERATE_CLEAN_URLS and GENERATE_ABSOLUTE_FS_URLS cannot "
         "be enabled at the same time."
         )
-
-
 class Server(object):
     """    
     Initializes and runs a cherrypy webserver serving static files from the deploy
@@ -269,9 +286,6 @@ class Generator(object):
         settings.DEPLOY_DIR = deploy_folder.path
         if not deploy_folder.exists:
             deploy_folder.make()
-        add_to_builtins('hydeengine.templatetags.hydetags')
-        add_to_builtins('hydeengine.templatetags.aym')
-        add_to_builtins('hydeengine.templatetags.typogrify')
         self.create_siteinfo()
     
     def create_siteinfo(self):
@@ -284,16 +298,20 @@ class Generator(object):
     
     def process_all(self):     
         self.notify(self.siteinfo.name, "Website Generation Started") 
-        try:
-            self.pre_process(self.siteinfo)
-            for resource in self.siteinfo.walk_resources():
-                self.process(resource)
-            self.complete_generation()
-        except:                                                  
-            print >> sys.stderr, "Generation Failed"
-            print >> sys.stderr, sys.exc_info()
-            self.notify(self.siteinfo.name, "Generation Failed")
-            return
+        self.pre_process(self.siteinfo)
+        for resource in self.siteinfo.walk_resources():
+            self.process(resource)
+        self.complete_generation()
+        #try:
+        #    self.pre_process(self.siteinfo)
+        #    for resource in self.siteinfo.walk_resources():
+        #        self.process(resource)
+        #    self.complete_generation()
+        #except:                                                  
+        #    print >> sys.stderr, "Generation Failed"
+        #    print >> sys.stderr, sys.exc_info()
+        #    self.notify(self.siteinfo.name, "Generation Failed")
+        #    return
         self.notify(self.siteinfo.name, "Generation Complete")               
         
     def complete_generation(self):
