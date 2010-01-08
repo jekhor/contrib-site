@@ -1,0 +1,11 @@
+body {background:#eee;}
+
+#container {background:#eee url(../img/bg/ie6-container.png) repeat-y 50% 0;}
+
+#header {background:#eee url(../img/bg/ie6-header.png);}
+
+#footer {background:#eee url(../img/bg/ie6-footer.png) no-repeat;}
+
+.wide {padding-left:65px;width:870px;}
+
+.portfolioItem a {padding-bottom:2px;}

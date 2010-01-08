@@ -1,0 +1,91 @@
+{% extends "skeleton/_one_column.html" %}
+{%hyde
+    title: "FAQ"
+%}
+{% block content_body %}
+<h4>Table of Contents</h4>
+<ol class="toc">
+    <li><a href="#Installation">Installation</a>
+    <ol>
+        <li><a href="#Doesitrunonalle-bookdevicesoutthereWhatsthestatusofdeviceX">Does it run on all e-book devices out there? What's the status of device …</a></li>
+        <li><a href="#IsitpossibletochangebacktotheoriginalfirmwareafterflashingOI">Is it possible to change back to the original firmware after flashing OI?</a></li>
+        <li><a href="#IsiteasytobrickthedevicebyinstallingOpenInkpot">Is it easy to brick the device by installing OpenInkpot?</a></li>
+    </ol>
+    </li>
+    <li><a href="#Usage">Usage</a><ol><li><a href="#Isitpossibletoaddmyownfonts">Is it possible to add my own fonts?</a></li><li><a href="#Isitnecessarytosetuptimedateeachtimeafterreboot">Is it necessary to set up time/date each time after reboot?</a></li><li><a href="#WhynothinghappensifIpressscrollwheelonN516">Why nothing happens if I press scroll wheel on N516?</a></li></ol></li><li><a href="#Technicalquestions">Technical questions</a><ol><li><a href="#Idliketoseethisapplicationfeaturelibrarywidgetset">I'd like to see this application/feature/library/widget set…</a></li><li><a href="#Whyareyouusing.debsandIPlinux">Why are you using <tt>.deb</tt>s and IPlinux?</a></li><li><a href="#IwantOpenInkpottobebasedonGentooFreeBSDWindows3.11HP-UX">I want OpenInkpot to be based on Gentoo/FreeBSD/Windows 3.11/HP-UX!</a></li><li><a href="#WhyareyouusingX">Why are you using X?</a></li><li><a href="#IsntXslowandbloated">Isn't X slow and bloated?</a></li><li><a href="#MyKDEGnomeWINDOW_MANAGERcrawls">My KDE|Gnome|$WINDOW_MANAGER crawls!</a></li></ol></li><li><a href="#Misc">Misc</a><ol><li><a href="#Howdoyouspellit">How do you spell it?</a></li><li><a href="#HowcanIhelptheOpenInkpotproject">How can I help the OpenInkpot project?</a></li></ol></li></ol>
+
+
+<h2 id="Installation">Installation</h2>
+<h3 id="Doesitrunonalle-bookdevicesoutthereWhatsthestatusofdeviceX">Does it run on all e-book devices out there? What's the status of device X?</h3>
+<p>
+Have a look at the <a href="http://openinkpot.org/wiki/Hardware">hardware status page</a>.
+</p>
+<h3 id="IsitpossibletochangebacktotheoriginalfirmwareafterflashingOI">Is it possible to change back to the original firmware after flashing OI?</h3>
+<p>
+Yes, for the Hanlin V3. See the <a class="wiki" href="/wiki/0.2/InstallationGuide">Installation Guide</a>.
+
+</p>
+<p>
+Not yet, for the Hanvon N516.
+</p>
+<h3 id="IsiteasytobrickthedevicebyinstallingOpenInkpot">Is it easy to brick the device by installing OpenInkpot?</h3>
+<p>
+It's virtually impossible to brick the Hanlin V3/V3ext, as the bootloader is not touched by the upgrade nor accessible from the running system.
+</p>
+<p>
+It is impossible to brick the Hanvon N516, as it has emergency reflash circuitry which works regardless of the firmware installed.
+</p>
+<h2 id="Usage">Usage</h2>
+<h3 id="Isitpossibletoaddmyownfonts">Is it possible to add my own fonts?</h3>
+<p>
+
+<a class="wiki" href="/wiki/User/Fonts#manual-installation">Yes</a>.
+</p>
+<h3 id="Isitnecessarytosetuptimedateeachtimeafterreboot">Is it necessary to set up time/date each time after reboot?</h3>
+<p>
+Yes. Go blame hardware vendors for it.
+</p>
+<h3 id="WhynothinghappensifIpressscrollwheelonN516">Why nothing happens if I press scroll wheel on N516?</h3>
+<p>
+Pressing scroll wheel does not do anything. Go blame hardware vendor for it.
+</p>
+<h2 id="Technicalquestions">Technical questions</h2>
+<h3 id="Idliketoseethisapplicationfeaturelibrarywidgetset">I'd like to see this application/feature/library/widget set…</h3>
+
+<p>
+Great! Go ahead and implement it - everyone will benefit from it.
+</p>
+<h3 id="Whyareyouusing.debsandIPlinux">Why are you using <tt>.deb</tt>s and IPlinux?</h3>
+<p>
+We used OpenEmbedded, but it was less-than-enjoyable experience: only full clean rebuilds worked well, <tt>mtn</tt> they used at the time was quite slow, distribution itself moved quickly, and internals of BitBake <tt>.class</tt>-files and BitBake itself are horrible. After we spent whole month trying to keep up with the changes in OpenEmbedded, everyone was quite pissed off, so we tried another embedded distributions and settled down on SLIND. Unfortunately, SLIND died, so we extracted generic-purpose SLIND-like distribution from the OpenInkpot and called it <a class="ext-link" href="http://iplinux.org/"><span class="icon"> </span>IPlinux</a>.
+
+</p>
+<h3 id="IwantOpenInkpottobebasedonGentooFreeBSDWindows3.11HP-UX">I want OpenInkpot to be based on Gentoo/FreeBSD/Windows 3.11/HP-UX!</h3>
+<p>
+Great! Go ahead, make GenktPot, InkBSD, Inkdows or OI-UX. We have more important problems to solve.
+</p>
+<h3 id="WhyareyouusingX">Why are you using X?</h3>
+<p>
+Why not?
+</p>
+<h3 id="IsntXslowandbloated">Isn't X slow and bloated?</h3>
+<p>
+No.
+</p>
+<h3 id="MyKDEGnomeWINDOW_MANAGERcrawls">My KDE|Gnome|$WINDOW_MANAGER crawls!</h3>
+
+<p>
+KDE|Gnome|$WINDOW_MANAGER != X.
+</p>
+<h2 id="Misc">Misc</h2>
+<h3 id="Howdoyouspellit">How do you spell it?</h3>
+<p>
+<strong>OpenInkpot</strong>, but not OpenInk, OpenInkPot or Open Ink Pot. You know, "inkpot" is a small bottle of ink and it does not have either capitalization or space inside.
+</p>
+<h3 id="HowcanIhelptheOpenInkpotproject">How can I help the OpenInkpot project?</h3>
+<p>
+We are always in need of new developers, ideally with access to ebook hardware, designers and [WikiTranslationGuide translators]. In addition, please look at the <a class="wiki" href="/wiki/Donations">Donations</a> page!
+
+</p>
+
+{% endblock %}

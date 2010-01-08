@@ -1,0 +1,258 @@
+body {
+    background: #ECECE5 url(../img/bg/body.png) repeat-x;
+    text-align: center;
+    font: 76%/1 'Lucida Grande','Lucida Sans Unicode','Lucida Sans',Helvetica,Arial,sans-serif;
+    color: #333;
+    padding-top:30px;
+}
+* {
+    margin:0;
+    padding:0;
+}
+:focus {
+    outline: 0;
+}
+
+img {
+    border:none;
+}
+ul {
+    list-style:none;
+}
+a {
+    text-decoration:none;
+}
+#clearBoth {
+    clear:both;
+}
+/*
+////////  1. LAYOUT  ////////*/
+
+#container {
+    width: 900px;
+    margin: 0 auto;
+    padding: 40px 35px 0 35px;
+    text-align: left;
+    background: url(../img/bg/container.png) repeat-y;
+}
+#home #container {
+    padding-top: 0;
+}
+#mainContent {
+    float:left;
+    width: 480px;
+    padding: 0 50px 0 30px;
+    border-right: 1px dotted #ddd;
+}
+#mainContent.wide {
+    width: 870px;
+}
+
+#secondaryContent {
+    float: right;
+    width: 280px;
+    padding-right: 30px;
+}
+
+/*
+////////  2. HEADER  ////////*/
+
+#header {
+    width: 970px;
+    margin: 0 auto;
+    height: 109px;
+    background: url(../img/bg/header.png);
+    position:relative;
+}
+
+a#logo {
+    float:left;
+    text-indent: -9999px;
+    background: url(../img/oi-logo.png) no-repeat;
+    width: 160px;
+    height: 50px;
+    position: absolute;
+    left:35px;
+    bottom:21px;
+}
+
+#header ul {
+    position: absolute;
+    left: 180px;
+    bottom: 30px;
+    text-align: left;
+}
+#header ul li {
+    float: left;
+    text-align: center;
+    background: url(../img/bg/navi2.png) no-repeat top right;
+    padding: 0; margin: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+/* second lvl nav */
+#header ul li ul {
+    bottom: -30px;
+    left: 0;
+}
+#header ul li a {
+    display: block;
+    font-size: 1em;
+    text-align: center;
+    color: #666;
+    height: 20px;
+    padding: 7px 10px 0 10px;
+    min-width: 82px;
+    background: url(../img/bg/navi2.png) no-repeat;
+}
+#header ul li ul li {
+    background: none;
+    margin-right: 5px;
+}
+#header ul li ul li a {
+    background: none;
+    text-decoration: underline;
+    text-align: left;
+    min-width: 0;
+}
+#header ul li a:hover {color:#222;}
+
+#header ul li.current {
+    background: url(../img/bg/current2.png) no-repeat top right
+}
+#header ul li.current ul li,
+#header ul li.current ul li a {
+    background: none;
+    color: #222;
+}
+#header ul li.current a {
+    color: #fff;
+    background: url(../img/bg/current2.png) no-repeat;
+}
+#header ul li.current a:hover {
+    color:#fff;
+}
+#header ul li.current ul li a:hover {
+    color: #777;
+}
+
+#contactInfo {position:absolute;right:35px;bottom:30px;color:#aaa;font-size:.9em;}
+#contactInfo a {color:#aaa;}
+#contactInfo a:hover {text-decoration:underline;}
+#contactInfo img {vertical-align:middle;}
+
+
+/*
+////////  3. FOOTER  ////////*/
+
+#footer {width:900px;margin:0 auto;clear:both;height:45px;background:url(../img/bg/footer.png) no-repeat;padding:53px 35px 0 35px;}
+
+#footer p {float:left;font-size:.9em;color:#666;}
+#footer p a {color:#666;}
+#footer p a:hover {text-decoration:underline;}
+#footer p em {color:#aaa;font-weight:bold;}
+#footer p.right {float:right;}
+
+
+/*
+////////  4. CONTENT  ////////*/
+
+h1,h2 {font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;}
+h1 {font-size:1.7em;color:#2F150F;}
+h2 {font-size:1.3em;color:#2F150F;margin-top:30px;}
+h3 {font-size:1.1em;margin-top:20px;}
+
+#container p, #container ul, #container ol {clear:both;font-size:1.1em;line-height:1.4em;margin:7px 0;}
+#container ol.toc li {
+    margin: 15px;
+    line-height: 12px;
+    font-size: 12px;
+}
+
+#container p a, #container ul li a {font-weight:bold;color:#4F2A22;}
+#container p a:hover, #container ul li a:hover  {text-decoration:underline;}
+#mainContent ul, #secondaryContent ul {list-style-type:circle;}
+blockquote {background:url(../img/bg/blockquote.png) no-repeat 0 3px;margin-left:-21px;padding-left:21px;}
+#secondaryContent {color:#777;}
+
+/* images */
+#container p img {float:left;margin:5px 20px 5px 0;border:3px solid #eee;}
+#container p img.imgRight {float:right;margin:5px 0 5px 20px;border:3px solid #eee;}
+#secondaryContent img {margin-top:20px;}
+
+/* tables */
+table {margin:7px 0;border-collapse:collapse;}    
+table thead th {padding:5px 24px;}
+table tbody th, table tbody td {padding:5px 24px;color:#444;}
+table thead th {background:#4F2A22;color:#fff;}
+table tbody tr.alt {background-color:#eee;}
+
+/* search */
+form#search {float:left;padding-bottom:15px;margin-bottom:20px;border-bottom:1px solid #e8e8e8;width:100%;}
+form#search fieldset {border:none;}
+form#search input {font-size:1em;color:#aaa;background:#fafafa;padding:3px;border:1px solid #ddd;}
+form#search input#submit {color:#fff;background:#aaa;cursor:pointer;padding:3px 4px;border:none;margin-left:-8px;}
+form#search input#submit:hover {color:#eee;}
+
+
+/*
+////////  5. HOMEPAGE  ////////*/
+
+#intro {margin-left:-30px;position:relative;}
+#home h1 {text-indent:-9999px;float:left;}
+
+#action {float:left;position:absolute;bottom:15px;right:0px;z-index:999;}
+
+#home #slider, #slider li {margin:0;padding:0;list-style:none;height:320px;}
+#slider li .sliderContent {position:absolute;bottom:0;left:0;z-index:999;width:900px;padding:20px 30px 10px 30px;background:url(../img/bg/transparentWhite.png);}
+#slider li .sliderContent h2 {color:#000;font-size:1.3em;margin:0 0 5px;}
+#slider li .sliderContent p {float:left;color:#000;font-size:1em;line-height:1.3em;width:600px;margin-top:0;}
+
+#featuredArea {float:left;width:100%;background:url(../img/bg/featuredArea.png) no-repeat;padding-top:30px;}
+.featured {float:left;width:283px;padding-right:25px;}
+.featured.last {float:right;padding:0;}
+.featured ul li, .featured p {padding-bottom:5px;}
+
+.featured h2 {clear:both;font-size:1.5em;color:#222;margin:0;}
+.featured h2 img {vertical-align:middle;}
+.featured blockquote span, #container ul li span {color:#999;}
+.featured blockquote {background:url(../img/bg/blockquote2.png) no-repeat 0 3px;margin-left:-12px;padding-left:12px;}
+
+a.linkButton {float:left;clear:both;color:#fff;background:#4F2A22;padding:5px 10px;margin:0 6px 6px 0;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;text-shadow:#444 1px 1px 1px;}
+a.linkButton:hover {text-decoration:underline;}
+
+
+/*
+////////  6. PORTFOLIO  ////////*/
+
+.portfolioItem a {display:block;float:left;margin:20px 28px 0 0;position:relative;width:250px;height:130px;padding:5px;background:#222 url(../img/bg/portfolioItem.png);}
+.portfolioItem a:hover {background-position:left bottom;}
+
+.portfolioItem strong {position:absolute;bottom:5px;left:5px;width:240px;z-index:2;color:#fff;background:url(../img/bg/transparentBlack.png);font-weight:normal;padding:5px 5px;}
+
+.new {display:block;position:absolute;top:-1px;right:-1px;width:39px;height:39px;background:url(../img/bg/new.png);z-index:99;}
+
+
+/*
+////////  7. CONTACT FORM  ////////*/
+
+form#contact fieldset {border:none;margin-top:20px;}
+form#contact fieldset input, form#contact fieldset textarea {background:#f8f8f8;border:1px solid #ddd;color:#666;font:1em Verdana,sans-serif;padding:4px;}
+form#contact fieldset input {padding-left:26px;background-position:5px 50%;background-repeat:no-repeat;width:200px;}
+form#contact fieldset input.name {background-image:url(../img/icons/form-name.png);}
+form#contact fieldset input.phone {background-image:url(../img/icons/form-phone.png);}
+form#contact fieldset input.email {background-image:url(../img/icons/form-email.png);}
+form#contact fieldset .inputShadow {background:url(../img/bg/inputShadow.png) left bottom no-repeat;padding-bottom:9px;}
+
+form#contact fieldset input:focus, form#contact fieldset textarea:focus {border:2px solid #ccc;padding:3px 3px 3px 26px;background-position:4px 50%;}
+form#contact fieldset textarea:focus {padding-left:3px;}
+form#contact fieldset label {color:#333;padding:10px 0 3px 0;display:block;}
+
+form#contact fieldset textarea {width:435px;overflow:auto;}
+form#contact fieldset button {color:#fff;background:#62bb03;padding:6px 10px;border-radius:8px;-webkit-border-radius:8px;-moz-border-radius:8px;text-shadow:#444 1px 1px 1px;border:0;cursor:pointer;}
+form#contact fieldset button:hover {color:#eee;}
+
+.required {color:#AD0000;font-weight:bold;font-size:1.2em;}
+p.messageSent, p.messageError {background:#FFFBCF url(../img/icons/messageSent.png) 12px 50% no-repeat;border:1px solid #FFF47F;padding:5px 5px 5px 38px;font-size:1em;color:#333;margin:10px 0;width:400px;}
+p.messageError {color:#eee;background:#E76757 url(../img/icons/messageError.png) 12px 50% no-repeat;border-color:#FF4F5A;}
+#mainContent p.messageError a {color:#fff;text-decoration:underline;}

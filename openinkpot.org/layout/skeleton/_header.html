@@ -1,0 +1,32 @@
+<div id="header">
+    {% block sitenav %}
+    <a href="{{site.url}}/index.html" id="logo"><h1>{{site.name}}</h1></a>
+    <div id="sitenav">
+        <ul>
+            <li{% ifequal page.module site.module %} class="current" {% endifequal %}>
+                <a href="{{site.listing_url}}">Home</a>
+            </li>    
+            {% for module in site.children %}
+            <li{% ifequal page.module module %} class="current" {% endifequal %}>
+                <a href="{{module.listing_url}}">
+                    {{module.name|unslugify}}
+                </a>
+                {% ifequal page.module module %}
+                {% if module.children %}
+                <ul>
+                    {% for kid in module.children %}
+                    <li{% ifequal page.module.listing_url kid.listing_url %} class="current" {% endifequal %}>
+                        <a href="{{kid.listing_url}}">
+                            {{kid.name|unslugify}}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endifequal %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endblock %}
+</div>
