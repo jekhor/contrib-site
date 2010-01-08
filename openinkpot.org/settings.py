@@ -12,11 +12,10 @@ TMP_DIR = os.path.join(ROOT_PATH, 'deploy_tmp')
 BACKUPS_DIR = os.path.join(ROOT_PATH, 'backups')
 BACKUP = False
 
-SITE_ROOT = "/"
-SITE_WWW_URL = "http://www.openinkpot.org"
+SITE_WWW_URL = "http://test.openinkpot.org/"
 SITE_NAME = "OpenInkpot"
 SITE_AUTHOR = ""
-SITE_ROOT = "/"
+SITE_ROOT = ""
 
 #Url Configuration
 GENERATE_ABSOLUTE_FS_URLS = False
@@ -55,19 +54,6 @@ APPEND_SLASH = False
 MEDIA_PROCESSORS = {
     '*':{
         '.css':('hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.YUICompressor',),
-        '.ccss':('hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.CleverCSS',
-                'hydeengine.media_processors.YUICompressor',),
-        '.sass':('hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.SASS',
-                'hydeengine.media_processors.YUICompressor',),                
-        '.less':('hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.LessCSS',
-                'hydeengine.media_processors.YUICompressor',),                
-        '.hss':(
-                'hydeengine.media_processors.TemplateProcessor',
-                'hydeengine.media_processors.HSS',
                 'hydeengine.media_processors.YUICompressor',),
         '.js':(
                 'hydeengine.media_processors.TemplateProcessor',

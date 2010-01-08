@@ -20,7 +20,7 @@ ul {
     list-style:none;
 }
 a {
-    text-decoration:none;
+    text-decoration:underline;
 }
 #clearBoth {
     clear:both;
@@ -97,13 +97,14 @@ a#logo {
 }
 #header ul li a {
     display: block;
-    font-size: 1em;
+    font-size: 12px;
     text-align: center;
     color: #666;
     height: 20px;
     padding: 7px 10px 0 10px;
     min-width: 82px;
     background: url(../img/bg/navi2.png) no-repeat;
+    text-decoration: none;
 }
 #header ul li ul li {
     background: none;

@@ -1,5 +1,5 @@
 {% extends "skeleton/_base.html" %}
-{% block title %}{{page.title}} — {{site.name}}{% endblock %}
+{% block title %}{{page.title or ''}} — {{site.name}}{% endblock %}
 {% block content %}
 <div id="mainContent" class="wide">
 {% block context_nav %}{% endblock %}

@@ -3,27 +3,44 @@
     <a href="{{site.url}}/index.html" id="logo"><h1>{{site.name}}</h1></a>
     <div id="sitenav">
         <ul>
-            <li{% ifequal page.module site.module %} class="current" {% endifequal %}>
+            <li{% if page.module == site.module %} class="current" {% endif %}>
                 <a href="{{site.listing_url}}">Home</a>
             </li>    
             {% for module in site.children %}
-            <li{% ifequal page.module module %} class="current" {% endifequal %}>
+            <li{% if page.module == module %} class="current"{% endif %}>
                 <a href="{{module.listing_url}}">
-                    {{module.name|unslugify}}
+                    {% if module.has_listing and module.listing_page.title %}
+                    {{module.listing_page.title}}
+                    {% else %}
+                    {{module.name}}
+                    {% endif %}
                 </a>
-                {% ifequal page.module module %}
+                {% if page.module == module %}
                 {% if module.children %}
                 <ul>
                     {% for kid in module.children %}
-                    <li{% ifequal page.module.listing_url kid.listing_url %} class="current" {% endifequal %}>
+                    <li{% if page.module.listing_url == kid.listing_url %} class="current" {% endif %}>
                         <a href="{{kid.listing_url}}">
-                            {{kid.name|unslugify}}
+                            {{kid.name}}
                         </a>
                     </li>
                     {% endfor %}
                 </ul>
                 {% endif %}
-                {% endifequal %}
+                {% if module.pages %}
+                <ul>
+                    {% for kid in module.pages %}
+                    {% if kid != module.listing_page %}
+                    <li{% if page.module.listing_url == kid.listing_url %} class="current" {% endif %}>
+                        <a href="{{kid.full_url}}">
+                            {{kid.title}}
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% endif %}
             </li>
             {% endfor %}
         </ul>
