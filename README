@@ -1,0 +1,13 @@
+Static Site for OpenInkpot.org
+
+Dependencies:
+=============
+    - python >= 2.4
+    - jinja2
+
+Content Template Page Variables:
+================================
+ To be able to add a reusable page variable to a content template use the 'set'
+ jinja tag where the variable name is prefixed with 'hyde_':
+
+ {% set hyde_foo = 'Bar' %}
