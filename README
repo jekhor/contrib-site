@@ -11,3 +11,13 @@ Content Template Page Variables:
  jinja tag where the variable name is prefixed with 'hyde_':
 
  {% set hyde_foo = 'Bar' %}
+
+reStructuredText Suport:
+========================
+ You can add RST text using the 'rst' jinja tags:
+ {% rst %}
+ Title:
+ ======
+    A blockquote...
+ {$ endrst %}
+ Also, you can provide the initial header level after a comma in rst tag, e.g. {% rst, 3 %} will render head tags (h*) beginning with h3

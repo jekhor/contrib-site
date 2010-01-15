@@ -26,6 +26,8 @@ from lazysettings import settings
 from jinja2 import BaseLoader, TemplateNotFound
 from os.path import join, exists, getmtime
 
+from rsttag import RstExtension
+
 class AbsOrRelPathLoader(BaseLoader):
 
     def __init__(self, parent_path):
@@ -87,7 +89,7 @@ def setup_env(site_path):
         defaults.update(hyde_site_settings.__dict__)
         settings.configure(_HydeDefaults, **defaults)
         # setup jinja
-        settings.jinja_env = Environment(loader=AbsOrRelPathLoader(settings.LAYOUT_DIR))
+        settings.jinja_env = Environment(loader=AbsOrRelPathLoader(settings.LAYOUT_DIR), extensions=[RstExtension])
     except Exception, err:
         print "Site settings are not defined properly"
         print err
